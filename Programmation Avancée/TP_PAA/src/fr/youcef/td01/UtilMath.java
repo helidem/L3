@@ -8,8 +8,8 @@ public class UtilMath {
         // System.out.println(listePremier(100));
         // jeuNombreSecret();
 
-        int[] tab = {8,9,19,1,2,3};
-        triFusion(tab, 0, tab.length-1);
+        int[] tab = {8, 9, 19, 1, 2, 3};
+        triFusion(tab, 0, tab.length - 1);
     }
 
     // exercice 1
@@ -225,7 +225,7 @@ public class UtilMath {
                     System.out.println("Au revoir");
                     return;
                 default:
-                    System.out.println("Commande inconnue");
+                    System.err.println("Commande inconnue");
             }
         } while (true);
     }
@@ -325,10 +325,11 @@ public class UtilMath {
 
     /**
      * Méthode qui trie un tableau d'entiers par ordre croissant
-     * @param t le tableau à trier
-     * @param iMin l'indice du premier élément à trier
+     *
+     * @param t       le tableau à trier
+     * @param iMin    l'indice du premier élément à trier
      * @param iMilieu l'indice du milieu du tableau (qui divise le tableau en 2)
-     * @param iMax l'indice du dernier élément à trier
+     * @param iMax    l'indice du dernier élément à trier
      */
     public static void fusion(int[] t, int iMin, int iMilieu, int iMax) {
         int[] t1 = new int[iMilieu - iMin + 1];
