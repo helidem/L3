@@ -11,6 +11,7 @@ void main(){
     char commande [TAILLE_LIGNE]; // commande tapée par l'utilisateur
     char *arg[TAILLE_ARG]; // tableau de pointeur sur les arguments de la commande
     char *bg; // pour les commandes en arriere plan
+    char *redir; // pour les redirections des entrees/sorties
     char *mot; // pointeur vers le mot courant
     int i;
     int pid, code_retour;
@@ -26,13 +27,22 @@ void main(){
         /*     une commande en arrière plan */
         if (bg=strrchr(commande, '&')) *bg='\0';
 
-        // analyse de la ligne de commande
-        for(i=0,mot=strtok(commande, " ");mot!=NULL;mot=strtok(NULL, " "), i++){
-            // preparation des arguments pour execvp
-            arg[i] = (char *) malloc(strlen(mot)+1);
-            strcpy(arg[i], mot);
-          
+        /* => suppression du > eventuel de la ligne de commande pour rediriger
+                la sortie standard */
+        if (redir=strrchr(commande, '>')) {
+            // analyse de la ligne de commande
+            for(i=0,mot=strtok(commande, " ");strcmp(mot,">")!=0;mot=strtok(NULL, " "), i++){
+                // preparation des arguments pour execvp
+                arg[i] = (char *) malloc(strlen(mot)+1);
+                strcpy(arg[i], mot);
+            
+            }
+            printf("redirection\n");
+            // on duplique le descripteur de fichier de la sortie standard vers le fichier juste apres le ">"
+            
         }
+
+        
         arg[i] = NULL; // la derniere case du tableau doit etre NULL
 
         if(i>0){
