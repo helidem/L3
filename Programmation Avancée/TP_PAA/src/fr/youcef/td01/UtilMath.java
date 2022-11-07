@@ -1,5 +1,6 @@
 package fr.youcef.td01;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UtilMath {
@@ -8,8 +9,7 @@ public class UtilMath {
         // System.out.println(listePremier(100));
         // jeuNombreSecret();
 
-        int[] tab = {8, 9, 19, 1, 2, 3};
-        triFusion(tab, 0, tab.length - 1);
+        cmd2();
     }
 
     // exercice 1
@@ -18,18 +18,28 @@ public class UtilMath {
         return a + b + c;
     }
 
-    public static long fact(int n) {
+    public static long fact(int n) throws IllegalArgumentException {
+        if (n < 0) {
+            throw new IllegalArgumentException("n doit être positif");
+        }
+
         if (n == 0) {
             return 1;
         } else return (n * fact(n - 1));
     }
 
-    public static long comb(int n, int p) {
+    public static long comb(int n, int p) throws IllegalArgumentException {
+        if (p > n) {
+            throw new IllegalArgumentException("p doit être inférieur à n");
+        }
         assert (n >= 0 && p >= 0);
         return fact(n) / fact(p) * fact(n - p);
     }
 
-    public static long puissance(int n, int m) {
+    public static long puissance(int n, int m) throws IllegalArgumentException {
+        if (m < 0) {
+            throw new IllegalArgumentException("m doit être positif");
+        }
         if (m == 0)
             return 1;
         else
@@ -161,27 +171,52 @@ public class UtilMath {
             switch (choix) {
                 case "1":
                     System.out.print("Entrez 3 entiers : ");
-                    int a = in.nextInt();
-                    int b = in.nextInt();
-                    int c = in.nextInt();
+                    int a = 0;
+                    int b = 0;
+                    int c = 0;
+                    try {
+                        a = in.nextInt();
+                        b = in.nextInt();
+                        c = in.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println(e.getMessage());
+                    }
                     System.out.println(somme3(a, b, c));
                     break;
                 case "2":
                     System.out.print("Entrez un entier : ");
-                    int n = in.nextInt();
-                    System.out.println(fact(n));
+                    try {
+                        int n = in.nextInt();
+                        System.out.println(fact(n));
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    } catch (InputMismatchException e) {
+                        System.out.println("Entier invalide");
+                    }
                     break;
                 case "3":
                     System.out.print("Entrez 2 entiers : ");
                     int n1 = in.nextInt();
                     int p = in.nextInt();
-                    System.out.println(comb(n1, p));
+                    try {
+                        System.out.println(comb(n1, p));
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    } catch (InputMismatchException e) {
+                        System.out.println("Entier invalide");
+                    }
                     break;
                 case "4":
                     System.out.print("Entrez 2 entiers : ");
                     int n2 = in.nextInt();
                     int m = in.nextInt();
-                    System.out.println(puissance(n2, m));
+                    try {
+                        System.out.println(puissance(n2, m));
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    } catch (InputMismatchException e) {
+                        System.out.println("Entier invalide");
+                    }
                     break;
                 case "5":
                     System.out.println("Au revoir");
