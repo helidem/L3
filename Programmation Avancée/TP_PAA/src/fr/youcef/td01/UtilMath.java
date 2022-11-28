@@ -33,7 +33,7 @@ public class UtilMath {
             throw new IllegalArgumentException("p doit être inférieur à n");
         }
         assert (n >= 0 && p >= 0);
-        return fact(n) / fact(p) * fact(n - p);
+        return fact(n) / (fact(p) * fact(n - p));
     }
 
     public static long puissance(int n, int m) throws IllegalArgumentException {

@@ -19,6 +19,13 @@ public class RepertoireSimple {
         this.repertoireSimple.add(new Personne(nom, prenom, num));
     }
 
+    /**
+     * Donne le numéro de téléphone d'une personne à partir de son nom et de son prénom.
+     * @param nom le nom de la personne
+     * @param prenom le prénom de la personne
+     * @return le numéro de téléphone de la personne
+     * @throws RepertoireInvalide si la personne n'est pas dans le répertoire
+     */
     public String chercheNumero(String nom, String prenom) throws RepertoireInvalide {
         for (Personne p : repertoireSimple) {
             if (p.getNom().equals(nom) && p.getPrenom().equals(prenom)) {
